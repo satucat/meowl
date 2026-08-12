@@ -1,0 +1,282 @@
+<html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+    * {
+        font-family: 'Roboto Mono', monospace;
+        color: #ffffff;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        user-select: none;
+        cursor: url('assets/images/cursor.gif'), auto;
+    }
+
+    body {
+        background-color: rgb(17, 17, 27);
+    }
+
+    .center {
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
+    .box {
+        width: 400px;
+        height: auto;
+        background-color: rgb(30, 30, 46);
+        border-radius: 1px;
+        border: 2px solid rgb(108, 112, 134);
+        color: aqua;
+        padding: 10px;
+        margin-bottom: 10px;
+        transition: border-color 0.2s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .box:hover {
+        border-color: rgb(255, 255, 255);
+    }
+
+    .box-buttons {
+        width: 400px;
+        height: auto;
+        background-color: rgb(30, 30, 46);
+        border-radius: 1px;
+        border: 2px solid rgb(108, 112, 134);
+        color: aqua;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        gap: 8px;
+        transition: border-color 0.2s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .box-buttons:hover {
+        border-color: rgb(255, 255, 255);
+    }
+
+    .header-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .pfp {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid rgb(108, 112, 134);
+        object-fit: cover;
+    }
+
+    /* this thing is called ratafak */
+
+    .button {
+        width: auto;
+        height: auto;
+        background-color: rgb(30, 30, 46);
+        border-radius: 1px;
+        border: 2px solid rgb(108, 112, 134);
+        color: aqua;
+        padding: 10px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    footer {
+        text-align: center;
+        font-size: 15px;
+        opacity: 0.2;
+    }
+
+    .mutebutton {
+        width: 40px;
+        height: 40px;
+        background-color: rgb(30, 30, 46);
+        border-radius: 1px;
+        border: 2px solid rgb(108, 112, 134);
+        cursor: pointer;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+    }
+
+    .clicktoenter {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(17, 17, 27);
+        position: fixed;
+        top: 0;
+        left: 0;
+        transition: background-color 0.2s ease;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        line-height: 100vh;
+        font-size: 20px;
+        z-index: 10000;
+        cursor: url('assets/images/cursor.gif'), auto;
+    }
+
+    .clicktoenter:hover {
+        background-color: rgb(78, 82, 94);
+    }
+
+    .mutebutton:hover {
+        background-color: rgb(78, 82, 94);
+        border-color: rgb(255, 255, 255);
+        cursor: url('assets/images/cursor.gif'), auto;
+    }
+
+    .button-icon {
+        width: 18px;
+        height: 18px;
+        filter: invert(72%) sepia(82%) saturate(3026%) hue-rotate(133deg) brightness(101%) contrast(102%);
+    }
+
+    .button:hover {
+        background-color: rgb(108, 112, 134);
+        border-color: rgb(255, 255, 255);
+        cursor: url('assets/images/cursor.gif'), auto;
+    }
+</style>
+
+<head>
+    <title>satu.zip</title>
+</head>
+
+<body>
+    <div class="center">
+        <div class="box">
+            <div class="header-container">
+                <img class="pfp" src="assets/images/pfp.png" alt="pfp">
+                <div class="header-text">
+                    <h1>satu</h1>
+                    <p>@satu.zip</p>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <p>i'm saturn</p>
+            <p>aka: satu, satucat, onecat</p>
+            <p>i know: html, css, luau, and python</p>
+            <p>currently learning javascript</p>
+        </div>
+        <div class="box-buttons">
+            <a href="https://discord.com/users/1246508479678513212" target="_blank">
+                <button class="button">
+                    <img src="assets/logos/discord.svg" alt="icon" class="button-icon">
+                    satu.zip
+                </button>
+            </a>
+            <a href="https://t.me/saturncat06" target="_blank">
+                <button class="button">
+                    <img src="assets/logos/telegram.svg" alt="icon" class="button-icon">
+                    saturncat06
+                </button>
+            </a>
+            <a href="https://www.roblox.com/users/970445711/profile" target="_blank">
+                <button class="button">
+                    <img src="assets/logos/roblox.svg" alt="icon" class="button-icon">
+                    SaturnOnSchoolWiFi
+                </button>
+            </a>
+            <!--
+            Here lies AH:RE
+            I quit working on it.
+            <a href="https://www.roblox.com/games/84910985279714/Admin-House-Reimagined" target="_blank">
+                <button class="button">
+                    <img src="assets/logos/home.svg" alt="icon" class="button-icon">
+                    AH:RE (Roblox game)
+                </button>
+            </a>
+            -->
+        </div>
+        <div class="box-buttons">
+            <a href="https://git.satu.zip" target="_blank">
+                <button class="button">
+                    <img src="assets/logos/forgejo.svg" alt="icon" class="button-icon">
+                    forgejo
+                </button>
+            </a>
+            <a href="https://satu.zip" target="_blank">
+                <button class="button">
+                    <img src="assets/logos/zipline.svg" alt="icon" class="button-icon">
+                    zipline
+                </button>
+            </a>
+        </div>
+        <footer id="nowplaying">
+            <p>now playing: -</p>
+        </footer>
+    </div>
+    <div class="clicktoenter" id="clicktoenter">
+        <p>click me</p>
+    </div>
+    <button class="mutebutton" id="mutebutton">
+        <img id="mute-icon" src="assets/images/music.svg" alt="icon" class="button-icon">
+    </button>
+    <audio id="music" src="assets/Shameful - leverfall.mp3" preload="auto" loop="true" hidden></audio>
+    <script>
+        var cte = document.getElementById("clicktoenter");
+        // ai!!! oh no!!!
+        // yeah, i barely know javascript
+        // still learning...
+
+        // for real though
+
+        // i need to learn better
+        // might be hypocricy because i've called out others for using ai in the past
+
+        // but whatever
+        // it's just a small website
+        // doesn't have to be perfect
+
+        var muteBtn = document.getElementById("mutebutton");
+        var muteIcon = document.getElementById("mute-icon");
+        var music = document.getElementById("music");
+        var nowplaying = document.getElementById("nowplaying");
+
+        cte.addEventListener("click", function () {
+            cte.animate(
+                [{ opacity: 1 }, { opacity: 0 }],
+                { duration: 200, fill: 'forwards' }
+            );
+            setTimeout(() => {
+                cte.style.display = "none";
+            }, 600);
+            music.play();
+            music.volume = 0.3;
+            let fileName = decodeURIComponent(music.src.split("/").pop());
+            nowplaying.innerHTML = `<p>${fileName}</p>`;
+        });
+
+        muteBtn.addEventListener("click", function () {
+            if (music.paused) {
+                music.play();
+                muteIcon.src = "assets/images/music.svg";
+            }
+            else {
+                music.pause();
+                muteIcon.src = "assets/images/mute.svg";
+            }
+        });
+    </script>
+    <script src="assets/scripts/snowstorm.js"></script>
+</body>
+
+</html>
