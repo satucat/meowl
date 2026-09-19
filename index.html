@@ -9,11 +9,11 @@
         margin: 0;
         box-sizing: border-box;
         user-select: none;
-        cursor: url('assets/images/cursor.gif'), auto;
     }
 
     body {
         background-color: rgb(17, 17, 27);
+        overflow: hidden;
     }
 
     .center {
@@ -119,7 +119,7 @@
     .clicktoenter {
         width: 100vw;
         height: 100vh;
-        background-color: rgb(17, 17, 27);
+        background-color: rgba(17, 17, 27, 0.6);
         position: fixed;
         top: 0;
         left: 0;
@@ -129,17 +129,16 @@
         line-height: 100vh;
         font-size: 20px;
         z-index: 10000;
-        cursor: url('assets/images/cursor.gif'), auto;
     }
 
     .clicktoenter:hover {
-        background-color: rgb(78, 82, 94);
+        background-color: rgba(78, 82, 94, 0.6);
     }
 
     .mutebutton:hover {
         background-color: rgb(78, 82, 94);
         border-color: rgb(255, 255, 255);
-        cursor: url('assets/images/cursor.gif'), auto;
+        cursor: pointer;
     }
 
     .button-icon {
@@ -151,7 +150,6 @@
     .button:hover {
         background-color: rgb(108, 112, 134);
         border-color: rgb(255, 255, 255);
-        cursor: url('assets/images/cursor.gif'), auto;
     }
 </style>
 
@@ -233,6 +231,8 @@
     <audio id="music" src="assets/Waiting - leverfall.wav" preload="auto" loop="true" hidden></audio>
     <script>
         var cte = document.getElementById("clicktoenter");
+        cte.style.backdropFilter = "blur(12px)";
+        cte.style.webkitBackdropFilter = "blur(12px)"; // fuck safari
 
         var muteBtn = document.getElementById("mutebutton"); // autocomplete did this one for me
         const tianjo = document.querySelector("#tianjobutton .button-icon");
