@@ -27,7 +27,7 @@
     .box {
         width: 400px;
         height: auto;
-        background-color: rgb(30, 30, 46);
+        background-color: rgb(30, 30, 46, 0.5);
         border-radius: 1px;
         border: 2px solid rgb(108, 112, 134);
         color: aqua;
@@ -44,7 +44,7 @@
     .box-buttons {
         width: 400px;
         height: auto;
-        background-color: rgb(30, 30, 46);
+        background-color: rgb(30, 30, 46, 0.5);
         border-radius: 1px;
         border: 2px solid rgb(108, 112, 134);
         color: aqua;
@@ -80,7 +80,7 @@
     .button {
         width: auto;
         height: auto;
-        background-color: rgb(30, 30, 46);
+        background-color: rgb(30, 30, 46, 0.2);
         border-radius: 1px;
         border: 2px solid rgb(108, 112, 134);
         color: aqua;
@@ -102,7 +102,7 @@
     .mutebutton {
         width: 40px;
         height: 40px;
-        background-color: rgb(30, 30, 46);
+        background-color: rgb(30, 30, 46, 0.2);
         border-radius: 1px;
         border: 2px solid rgb(108, 112, 134);
         cursor: pointer;
@@ -156,31 +156,31 @@
 </style>
 
 <head>
-    <title>satu.zip</title>
+    <title>my corner</title>
 </head>
 
 <body>
     <div class="center">
         <div class="box">
             <div class="header-container">
-                <img class="pfp" src="assets/images/pfp.png" alt="pfp">
+                <img id="pfp" class="pfp" src="" alt="pfp">
                 <div class="header-text">
                     <h1>satu</h1>
-                    <p>@satu.zip</p>
+                    <p id="discordusername">@satu_2</p>
                 </div>
             </div>
         </div>
         <div class="box">
-            <p>i'm saturn</p>
-            <p>aka: satu, satucat, onecat</p>
+            <p>i'm satu</p>
+            <p>aka: saturn, satucat, onecat</p>
             <p>i know: html, css, luau, and python</p>
-            <p>currently learning javascript</p>
+            <p>my favourite language is python</p>
         </div>
         <div class="box-buttons">
             <a href="https://discord.com/users/1246508479678513212" target="_blank">
                 <button class="button">
-                    <img src="assets/logos/discord.svg" alt="icon" class="button-icon">
-                    satu.zip
+                    <img src="assets/logos/discord.svg" alt="icon" class="button-icon" id="discordbutton">
+                    satu_2
                 </button>
             </a>
             <a href="https://t.me/saturncat06" target="_blank">
@@ -207,10 +207,10 @@
             -->
         </div>
         <div class="box-buttons">
-            <a href="https://git.satu.zip" target="_blank">
-                <button class="button">
-                    <img src="assets/logos/forgejo.svg" alt="icon" class="button-icon">
-                    forgejo
+            <a href="https://tianjo.cc/satu" target="_blank">
+                <button class="button" id="tianjobutton">
+                    <img src="assets/logos/tianjo.png" alt="icon" class="button-icon">
+                    tianjo
                 </button>
             </a>
             <a href="https://satu.zip" target="_blank">
@@ -230,26 +230,46 @@
     <button class="mutebutton" id="mutebutton">
         <img id="mute-icon" src="assets/images/music.svg" alt="icon" class="button-icon">
     </button>
-    <audio id="music" src="assets/Shameful - leverfall.mp3" preload="auto" loop="true" hidden></audio>
+    <audio id="music" src="assets/Waiting - leverfall.wav" preload="auto" loop="true" hidden></audio>
     <script>
         var cte = document.getElementById("clicktoenter");
-        // ai!!! oh no!!!
-        // yeah, i barely know javascript
-        // still learning...
 
-        // for real though
-
-        // i need to learn better
-        // might be hypocricy because i've called out others for using ai in the past
-
-        // but whatever
-        // it's just a small website
-        // doesn't have to be perfect
-
-        var muteBtn = document.getElementById("mutebutton");
+        var muteBtn = document.getElementById("mutebutton"); // autocomplete did this one for me
+        const tianjo = document.querySelector("#tianjobutton .button-icon");
+        if (tianjo) {
+            tianjo.style.filter = "none";
+        }
         var muteIcon = document.getElementById("mute-icon");
         var music = document.getElementById("music");
         var nowplaying = document.getElementById("nowplaying");
+
+        const discordid = "1243538246722388000"; // i'll change this everytime (if u wanna steal my website just change this to ur discord id)
+
+        async function getavatarhash() {
+            try {
+                const req = await fetch(`https://api.lanyard.rest/v1/users/${discordid}`);
+                const data = await req.json();
+                console.log("got: " + data.data["discord_user"]["avatar"]);
+                return data.data["discord_user"]["avatar"];
+            }
+            catch {
+                console.log("can't get hash!")
+                return
+            }
+        }
+
+        async function getcurrentuser() {
+            try {
+                const req = await fetch(`https://api.lanyard.rest/v1/users/${discordid}`);
+                const data = await req.json();
+                console.log(data.data["discord_user"]["username"]);
+                return data.data["discord_user"]["username"];
+            }
+            catch {
+                console.log("can't get username!");
+                return
+            }
+        }
 
         cte.addEventListener("click", function () {
             cte.animate(
@@ -265,6 +285,23 @@
             nowplaying.innerHTML = `<p>${fileName}</p>`;
         });
 
+        (async function () {
+            let hash = await getavatarhash();
+            if (hash) {
+                document.getElementById("pfp").src = `https://cdn.discordapp.com/avatars/${discordid}/${hash}.png?size=4096`;
+            } else {
+                document.getElementById("pfp").src = "assets/images/pfp.png";
+            }
+            let name = await getcurrentuser();
+            if (name) {
+                document.getElementById("discordbutton").innerHTML = "<img src=\"assets/logos/discord.svg\" alt=\"icon\" class=\"button-icon\">" + name;
+                document.getElementById("discordusername").innerHTML = "@" + name;
+            } else {
+                document.getElementById("discordbutton").innerHTML = "<img src=\"assets/logos/discord.svg\" alt=\"icon\" class=\"button-icon\">" + "can't fetch!";
+                document.getElementById("discordusername").innerHTML = "@null";
+            }
+        })();
+
         muteBtn.addEventListener("click", function () {
             if (music.paused) {
                 music.play();
@@ -275,8 +312,24 @@
                 muteIcon.src = "assets/images/mute.svg";
             }
         });
+
+        tianjobutton.style.transition = "none";
     </script>
-    <script src="assets/scripts/snowstorm.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
+    <script>
+        VANTA.CELLS({
+            el: "body",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 1080,
+            minWidth: 1920,
+            scale: 1.00,
+            color1: 0x7a57b3,
+            color2: 0x21306b
+        })
+    </script>
 </body>
 
 </html>
