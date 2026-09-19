@@ -175,7 +175,7 @@
             <p>my favourite language is python</p>
         </div>
         <div class="box-buttons">
-            <a href="https://discord.com/users/1246508479678513212" target="_blank">
+            <a id="discordlink" href="https://discord.com/users/0" target="_blank">
                 <button class="button">
                     <img src="assets/logos/discord.svg" alt="icon" class="button-icon" id="discordbutton">
                     satu_2
@@ -299,6 +299,17 @@
             } else {
                 document.getElementById("discordbutton").innerHTML = "<img src=\"assets/logos/discord.svg\" alt=\"icon\" class=\"button-icon\">" + "can't fetch!";
                 document.getElementById("discordusername").innerHTML = "@null";
+            }
+            const req = await fetch(`https://api.lanyard.rest/v1/users/${discordid}`);
+
+            const userdata = await req.json();
+            console.log(userdata.data);
+            if (userdata.data["discord_user"].id) {
+                document.getElementById("discordlink").href = `https://discord.com/users/${userdata.data["discord_user"].id}`;
+                console.log("got id! " + userdata.data["discord_user"].id);
+            } else {
+                document.getElementById("discordlink").href = "https://discord.com/users/0";
+                console.log("couldn't get id");
             }
         })();
 
