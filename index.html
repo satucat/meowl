@@ -1,4 +1,14 @@
 <html>
+<!--
+If you want to use this website for yourself, you must change:
+- the social links & buttons
+- your discord id
+
+join discord.gg/lanyard after you change your discord id, stuff will come to life
+this website uses https://lanyard.rest to get your user info
+
+If you DO use this website, please credit me for the source code since i made this entire thing
+-->
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
@@ -14,6 +24,8 @@
     body {
         background-color: rgb(17, 17, 27);
         overflow: hidden;
+        margin: 0;
+        height: 100vh;
     }
 
     .center {
@@ -22,10 +34,15 @@
         left: 50%;
         position: absolute;
         transform: translate(-50%, -50%);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .box {
-        width: 400px;
+        width: 90%;
+        max-width: 400px;
         height: auto;
         background-color: rgb(30, 30, 46, 0.5);
         border-radius: 1px;
@@ -42,7 +59,8 @@
     }
 
     .box-buttons {
-        width: 400px;
+        width: 90%;
+        max-width: 400px;
         height: auto;
         background-color: rgb(30, 30, 46, 0.5);
         border-radius: 1px;
@@ -74,8 +92,6 @@
         border: 2px solid rgb(108, 112, 134);
         object-fit: cover;
     }
-
-    /* this thing is called ratafak */
 
     .button {
         width: auto;
@@ -163,10 +179,14 @@
             <div class="header-container">
                 <img id="pfp" class="pfp" src="" alt="pfp">
                 <div class="header-text">
-                    <h1>satu</h1>
+                    <p style="font-size: 24px; font-weight: bold;">satu</p>
                     <p id="discordusername">@satu_2</p>
+                    <p id="time" style="opacity: 0.7; font-size: 12px;"></p>
                 </div>
             </div>
+        </div>
+        <div class="box">
+            <p id="status"><b>status</b>: hold on</p>
         </div>
         <div class="box">
             <p>i'm satu</p>
@@ -243,7 +263,7 @@
         var music = document.getElementById("music");
         var nowplaying = document.getElementById("nowplaying");
 
-        const discordid = "1243538246722388000"; // i'll change this everytime (if u wanna steal my website just change this to ur discord id)
+        const discordid = "1243538246722388000"; // If you're taking my src for yourself, change this. (u must join discord.gg/lanyard for it)
 
         async function getavatarhash() {
             try {
@@ -271,6 +291,22 @@
             }
         }
 
+        async function updateclock() {
+            const rn = new Date();
+
+            const londontime = rn.toLocaleTimeString("en-GB", {
+                timeZone: "Europe/London",
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            document.getElementById("time").innerText = "for me, it's " + londontime;
+        }
+        updateclock();
+        setInterval(updateclock, 1000);
+
         cte.addEventListener("click", function () {
             cte.animate(
                 [{ opacity: 1 }, { opacity: 0 }],
@@ -285,6 +321,7 @@
             nowplaying.innerHTML = `<p>${fileName}</p>`;
         });
 
+        // the magic function that gets your pfp (and username)
         (async function () {
             let hash = await getavatarhash();
             if (hash) {
@@ -311,6 +348,16 @@
                 document.getElementById("discordlink").href = "https://discord.com/users/0";
                 console.log("couldn't get id");
             }
+            console.log(userdata.data.discord_status)
+            if (userdata.data.discord_status) {
+                if (userdata.data.discord_status == "idle") {
+                    document.getElementById("status").innerHTML = "<b>status</b>: online";
+                } else {
+                    document.getElementById("status").innerHTML = "<b>status</b>: " + userdata.data.discord_status;
+                }
+            } else {
+                document.getElementById("status").innerHTML = "<b>status</b>: offline";
+            }
         })();
 
         muteBtn.addEventListener("click", function () {
@@ -326,16 +373,52 @@
 
         tianjobutton.style.transition = "none";
     </script>
+
+    <!-- load vanta -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
+
+    <!-- actually get vanta up -->
     <script>
+        // Source - https://stackoverflow.com/a/2035211
+        // Posted by Leo, modified by community. See post 'Timeline' for change history
+        // Retrieved 2026-09-20, License - CC BY-SA 2.5
+
+        // thanks leo
+
+        function getViewport() {
+            let viewPortWidth;
+            let viewPortHeight;
+
+            // the more standards compliant browsers (mozilla/netscape/opera/IE7) use window.innerWidth and window.innerHeight
+            if (typeof window.innerWidth != 'undefined') {
+                viewPortWidth = window.innerWidth,
+                    viewPortHeight = window.innerHeight
+            }
+
+            // IE6 in standards compliant mode (i.e. with a valid doctype as the first line in the document)
+            else if (typeof document.documentElement != 'undefined'
+                && typeof document.documentElement.clientWidth !=
+                'undefined' && document.documentElement.clientWidth != 0) {
+                viewPortWidth = document.documentElement.clientWidth,
+                    viewPortHeight = document.documentElement.clientHeight
+            }
+
+            // older versions of IE
+            else {
+                viewPortWidth = document.getElementsByTagName('body')[0].clientWidth,
+                    viewPortHeight = document.getElementsByTagName('body')[0].clientHeight
+            }
+            return [viewPortWidth, viewPortHeight];
+        }
+
         VANTA.CELLS({
             el: "body",
             mouseControls: true,
             touchControls: true,
             gyroControls: false,
-            minHeight: 1080,
-            minWidth: 1920,
+            minHeight: getViewport()[1], // so vanta didn't work on some devices. i was previously doing 1920x1080 (dumbass)
+            minWidth: getViewport()[0],
             scale: 1.00,
             color1: 0x7a57b3,
             color2: 0x21306b
